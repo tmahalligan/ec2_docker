@@ -29,3 +29,6 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io
 
 # Add your base user to the Docker group so that you do not need sudo to run docker commands
 sudo usermod -aG docker ubuntu
+
+# Download and place Discourse
+sudo git clone https://github.com/discourse/discourse_docker.git /var/discourse
