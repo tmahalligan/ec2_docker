@@ -10,7 +10,7 @@ resource "random_string" "random" {
 }
 
 resource "aws_key_pair" "key" {
-  key_name   = random_string.random.result
+  key_name   = "${var.deployname}.${random_string.random.result}"
   public_key = file("~/.ssh/${var.owner}.pub")
 }
 
@@ -25,7 +25,7 @@ resource "aws_instance" "docker_host" {
   subnet_id              = module.vpc.public_subnets[0]
   user_data              = file("files/dockerhost.sh")
   tags = {
-    Name = "dockerhost"
+    Name = "${var.deployname}.${random_string.random.result}"
     Owner = format("%s",data.external.whoiamuser.result.iam_user)
   }
 

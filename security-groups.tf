@@ -1,5 +1,5 @@
 resource "aws_security_group" "docker_host" {
-  name_prefix = "docker_host"
+  name_prefix = var.deployname
   vpc_id      = module.vpc.vpc_id
 
 

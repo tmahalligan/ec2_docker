@@ -1,1 +1,1 @@
-Base EC2 ubuntu deploy with k3d installed
+Base EC2 ubuntu deploy with docker installed
