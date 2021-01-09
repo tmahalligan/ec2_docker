@@ -1,5 +1,5 @@
 resource "aws_iam_role" "dockerhost" {
-  name = "dockerhost"
+  name_prefix = var.deployname
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -20,12 +20,12 @@ EOF
 
 
 resource "aws_iam_instance_profile" "dockerhost_profile" {
-  name = "jumphost"
+  name_prefix = var.deployname
   role = aws_iam_role.dockerhost.name
 }
 
 resource "aws_iam_role_policy" "dockerhost_policy" {
-  name   = "dockerhost_policy"
+  name_prefix   = var.deployname
   role   = aws_iam_role.dockerhost.id
   policy = <<EOF
 {

@@ -30,3 +30,8 @@ variable "volsize" {
   type    = number
   default = 50
 }
+
+variable "deployname" {
+  type    = string
+  default = "dockerhost"
+}
