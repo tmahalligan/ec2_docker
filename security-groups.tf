@@ -7,7 +7,8 @@ resource "aws_security_group" "docker_host" {
     from_port = 0
     to_port   = 0
     protocol  = "-1"
-    cidr_blocks = [format("%s/%s",data.external.whatismyip.result["internet_ip"],32)]
+   # cidr_blocks = [format("%s/%s",data.external.whatismyip.result["internet_ip"],32)]
+    cidr_blocks = ["${chomp(data.http.myip.body)}/32"]
   }
 
     ingress {

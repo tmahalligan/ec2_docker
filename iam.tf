@@ -34,7 +34,17 @@ resource "aws_iam_role_policy" "dockerhost_policy" {
     {
       "Action": [
         "s3:Get*",
-        "s3:List*"
+        "s3:List*",
+        "imagebuilder:GetComponent",
+        "imagebuilder:GetContainerRecipe",
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchGetImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:PutImage"
       ],
       "Effect": "Allow",
       "Resource": "*"

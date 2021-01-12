@@ -41,11 +41,6 @@ resource "aws_instance" "docker_host" {
     host        = self.public_ip
   }
 
-  provisioner "file" {
-    source      = "~/work/basetom.tar.gz"
-    destination = "/home/ubuntu/basetom.tar.gz"
-  }
-
 }
 
 
@@ -55,3 +50,11 @@ resource "aws_eip" "ip_docker" {
   instance = aws_instance.docker_host.id 
 }
 
+resource "aws_s3_bucket" "dockerhostbucket" {
+  bucket = "${var.deployname}.${random_string.random.result}"
+  acl    = "private"
+
+  tags = {
+    Owner = format("%s",data.external.whoiamuser.result.iam_user)
+  }
+}

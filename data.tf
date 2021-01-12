@@ -1,6 +1,11 @@
-data "external" "whatismyip" {
-  program = ["/bin/bash" , "files/whatismyip.sh"]
+#data "external" "whatismyip" {
+#  program = ["/bin/bash" , "files/whatismyip.sh"]
+#}
+
+data "http" "myip" {
+  url = "http://ipv4.icanhazip.com"
 }
+
 
 data "external" "whoiamuser" {
   program = ["/bin/bash" , "files/whoami.sh"]
