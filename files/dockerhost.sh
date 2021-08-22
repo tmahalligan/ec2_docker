@@ -29,3 +29,8 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io
 
 # Add your base user to the Docker group so that you do not need sudo to run docker commands
 sudo usermod -aG docker ubuntu
+
+# Install k9s
+sudo wget https://github.com/derailed/k9s/releases/download/v0.24.2/k9s_Linux_x86_64.tar.gz
+sudo tar -xvf k9s_Linux_x86_64.tar.gz
+sudo mv k9s /usr/local/bin/k9s

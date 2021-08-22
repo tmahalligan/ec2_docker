@@ -9,12 +9,27 @@ resource "random_string" "random" {
   upper  = false
 }
 
-resource "aws_key_pair" "key" {
-  key_name   = "${var.deployname}.${random_string.random.result}"
-  public_key = file("~/.ssh/${var.owner}.pub")
+#resource "aws_key_pair" "key" {
+#  key_name   = "${var.deployname}.${random_string.random.result}"
+#  public_key = file("~/.ssh/${var.owner}.pub")
+#}
+
+resource "tls_private_key" "dckr" {
+  algorithm = "RSA"
+  rsa_bits  = "2048"
 }
 
+# Write private key out to a file
+resource "local_file" "private_key" {
+  filename = "sshkey.pem"
+  file_permission   = 0600
+  sensitive_content = tls_private_key.dckr.private_key_pem
+}
 
+resource "aws_key_pair" "key" {
+  key_name   = "${var.deployname}.${random_string.random.result}"
+  public_key = tls_private_key.dckr.public_key_openssh
+}
 resource "aws_instance" "docker_host" {
   ami                    = data.aws_ami.ubuntu_linux.id
   instance_type          = var.amitype
