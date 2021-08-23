@@ -30,7 +30,47 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io
 # Add your base user to the Docker group so that you do not need sudo to run docker commands
 sudo usermod -aG docker ubuntu
 
+# Install Python pip  jq unzip
+sudo apt-get install -y python3-pip jq unzip
+
+# Install ansible
+sudo pip install ansible
+
+# Install k3d
+wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
+
+# Install eksctl
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+
+# Install helm
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+
+# Install sops
+wget https://github.com/mozilla/sops/releases/download/v3.7.1/sops_3.7.1_amd64.deb
+sudo dpkg -i sops_3.7.1_amd64.deb
+sudo rm sops_3.7.1_amd64.deb
+
+# Install Trivy
+wget https://github.com/aquasecurity/trivy/releases/download/v0.18.0/trivy_0.18.0_Linux-64bit.deb
+sudo dpkg -i trivy_0.18.0_Linux-64bit.deb
+sudo rm trivy_0.18.0_Linux-64bit.deb
+
+# Install Terraform
+wget https://releases.hashicorp.com/terraform/1.0.5/terraform_1.0.5_linux_amd64.zip
+sudo unzip terraform_1.0.5_linux_amd64.zip
+sudo mv terraform /usr/local/bin
+sudo rm terraform*
+
+
 # Install k9s
-sudo wget https://github.com/derailed/k9s/releases/download/v0.24.2/k9s_Linux_x86_64.tar.gz
+sudo wget https://github.com/derailed/k9s/releases/download/v0.24.15/k9s_Linux_x86_64.tar.gz
 sudo tar -xvf k9s_Linux_x86_64.tar.gz
 sudo mv k9s /usr/local/bin/k9s
+
+# Install Kubescape
+curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
+
+# Install Carvel Tools
+wget -O- https://carvel.dev/install.sh | bash
